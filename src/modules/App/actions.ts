@@ -2,6 +2,8 @@ import actionCreatorFactory from 'typescript-fsa';
 
 const actionCreator = actionCreatorFactory('App');
 
-export const actions = {
+const actions = {
   changeName: actionCreator<string>('changeName'),
 };
+
+export default actions;
