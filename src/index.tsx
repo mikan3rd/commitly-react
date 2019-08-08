@@ -1,17 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import Store from './store';
-import App from './containers/App';
+import { AppContainer } from 'react-hot-loader';
+import { ConnectedRouter } from 'connected-react-router';
+
+import configureStore, { history } from './configureStore';
+import routes from './routes';
 import * as serviceWorker from './serviceWorker';
 
 import 'semantic-ui-css/semantic.min.css';
 import './index.css';
 
+const store = configureStore();
+
 ReactDOM.render(
-  <Provider store={Store}>
-    <App />
-  </Provider>,
+  <AppContainer>
+    <Provider store={store}>
+      <ConnectedRouter history={history}>{routes}</ConnectedRouter>
+    </Provider>
+  </AppContainer>,
   document.getElementById('root')
 );
 
