@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { State } from '../reducers';
 import { AppState } from '../modules/App/reducers';
 import appActions from '../modules/App/actions';
-import App from '../components/App/App';
+import App from '../components/App';
 
 export interface AppStateToProps {
   appState: AppState;

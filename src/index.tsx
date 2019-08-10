@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { AppContainer } from 'react-hot-loader';
 import { ConnectedRouter } from 'connected-react-router';
+import firebase from 'firebase/app';
 
 import configureStore, { history } from './configureStore';
 import routes from './routes';
@@ -10,6 +11,17 @@ import * as serviceWorker from './serviceWorker';
 
 import 'semantic-ui-css/semantic.min.css';
 import './index.css';
+
+var firebaseConfig = {
+  apiKey: 'AIzaSyCOPncLMSkbelEOCye6o-xjWFcx0FNcDzs',
+  authDomain: 'commitly-27919.firebaseapp.com',
+  databaseURL: 'https://commitly-27919.firebaseio.com',
+  projectId: 'commitly-27919',
+  storageBucket: '',
+  messagingSenderId: '917003540938',
+  appId: '1:917003540938:web:c7ac2e1bdbc1c67d',
+};
+firebase.initializeApp(firebaseConfig);
 
 const store = configureStore();
 
