@@ -1,0 +1,8 @@
+html,
+body {
+  background: #f7f7f7;
+}
+
+.ui.yellow {
+  background-color: #fdd101 !important;
+}
