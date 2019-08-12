@@ -10,7 +10,7 @@ import routes from './routes';
 import * as serviceWorker from './serviceWorker';
 
 import 'semantic-ui-css/semantic.min.css';
-import './index.css';
+import 'react-semantic-toasts/styles/react-semantic-alert.css';
 
 var firebaseConfig = {
   apiKey: 'AIzaSyCOPncLMSkbelEOCye6o-xjWFcx0FNcDzs',
