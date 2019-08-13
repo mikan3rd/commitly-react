@@ -1,14 +1,14 @@
 import { Action } from 'typescript-fsa';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
+import { RouteComponentProps } from 'react-router';
 
 import { State } from '../reducers';
 import { AppState } from '../modules/App/reducers';
 import appActions from '../modules/App/actions';
-import App from '../components/App';
+import TopPage from '../components/TopPage';
 
 export interface AppStateToProps {
-  children?: any;
   appState: AppState;
 }
 
@@ -28,8 +28,8 @@ function mapDispatchToProps(dispatch: Dispatch<Action<string>>) {
   };
 }
 
-export type Props = AppStateToProps & AppActionsToProps;
+export type Props = AppStateToProps & AppActionsToProps & RouteComponentProps;
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(App);
+)(TopPage);
