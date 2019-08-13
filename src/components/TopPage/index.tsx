@@ -6,7 +6,7 @@ import { toast } from 'react-semantic-toasts';
 import { Props } from '../../containers/TopPage';
 import { path } from '../../routes';
 
-import logo from '../App/logo.png';
+import logo from '../../images/logo.png';
 
 const TopPage: React.FC<Props> = props => {
   const signInWithGitHub = () => {

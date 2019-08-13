@@ -4,8 +4,8 @@ import { SemanticToastContainer } from 'react-semantic-toasts';
 
 import { Props } from '../../containers/App';
 
-import './primary.css';
-import logo_header from './logo_header.png';
+import './overrides.css';
+import logo_header from '../../images/logo_header.png';
 
 const App = (props: Props) => {
   const { children } = props;
