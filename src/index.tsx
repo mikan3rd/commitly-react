@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import { AppContainer } from 'react-hot-loader';
 import { ConnectedRouter } from 'connected-react-router';
 import firebase from 'firebase/app';
+import 'firebase/auth';
 
 import configureStore, { history } from './configureStore';
 import routes from './routes';
@@ -31,7 +32,7 @@ ReactDOM.render(
       <ConnectedRouter history={history}>{routes}</ConnectedRouter>
     </Provider>
   </AppContainer>,
-  document.getElementById('root')
+  document.getElementById('root'),
 );
 
 // If you want your app to work offline and load faster, you can change

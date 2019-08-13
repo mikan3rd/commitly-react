@@ -1,7 +1,6 @@
 import React from 'react';
 import { Image, Button, Icon, Header, Grid } from 'semantic-ui-react';
 import firebase from 'firebase/app';
-import 'firebase/auth';
 import { toast } from 'react-semantic-toasts';
 
 import { Props } from '../../containers/TopPage';
