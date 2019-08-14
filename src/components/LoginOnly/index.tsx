@@ -7,11 +7,20 @@ import { Props } from '../../containers/LoginOnly';
 
 class LoginOnly extends React.Component<Props> {
   componentDidMount() {
-    const { chengeAuthChecked } = this.props;
-    firebase.auth().onAuthStateChanged(function(user) {
-      console.log(user);
-      chengeAuthChecked(true);
-    });
+    const {
+      appState: { authChecked },
+      chengeAuthChecked,
+    } = this.props;
+    if (!authChecked) {
+      const { currentUser } = firebase.auth();
+      if (currentUser) {
+        chengeAuthChecked(true);
+      } else {
+        firebase.auth().onAuthStateChanged(function(user) {
+          chengeAuthChecked(true);
+        });
+      }
+    }
   }
 
   render() {
@@ -25,7 +34,6 @@ class LoginOnly extends React.Component<Props> {
     }
 
     const { currentUser } = firebase.auth();
-
     if (!currentUser) {
       return <Redirect to={path.topPage} />;
     }
