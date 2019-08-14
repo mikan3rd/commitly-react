@@ -35,7 +35,6 @@ const MyPage: React.FC<Props> = props => {
         });
     }
   };
-
   return (
     <>
       <Header>MyPage</Header>

@@ -3,7 +3,7 @@ import actionCreatorFactory from 'typescript-fsa';
 const actionCreator = actionCreatorFactory('App');
 
 const actions = {
-  changeName: actionCreator<string>('changeName'),
+  chengeAuthChecked: actionCreator<boolean>('chengeAuthChecked'),
 };
 
 export default actions;

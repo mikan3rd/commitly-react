@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 
 import { State } from '../reducers';
 import { AppState } from '../modules/App/reducers';
-import App from '../components/App';
+import appActions from '../modules/App/actions';
+import LoginOnly from '../components/LoginOnly';
 
 export interface AppStateToProps {
   children?: any;
@@ -17,14 +18,18 @@ function mapStateToProps(state: State) {
   };
 }
 
-export interface AppActionsToProps {}
+export interface AppActionsToProps {
+  chengeAuthChecked: (v: boolean) => Action<boolean>;
+}
 
-function mapDispatchToProps(dispatch: Dispatch<Action<string>>) {
-  return {};
+function mapDispatchToProps(dispatch: Dispatch<Action<any>>) {
+  return {
+    chengeAuthChecked: (v: boolean) => dispatch(appActions.chengeAuthChecked(v)),
+  };
 }
 
 export type Props = AppStateToProps & AppActionsToProps;
 export default connect(
   mapStateToProps,
   mapDispatchToProps,
-)(App);
+)(LoginOnly);

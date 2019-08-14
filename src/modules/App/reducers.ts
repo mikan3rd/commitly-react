@@ -2,13 +2,16 @@ import { reducerWithInitialState } from 'typescript-fsa-reducers';
 import actions from './actions';
 
 export interface AppState {
-  name: string;
+  authChecked: boolean;
 }
 
 const initialState: AppState = {
-  name: '',
+  authChecked: false,
 };
 
-export const appReducer = reducerWithInitialState(initialState).case(actions.changeName, (state, name) => {
-  return { ...state, name };
-});
+export const appReducer = reducerWithInitialState(initialState).case(
+  actions.chengeAuthChecked,
+  (state, authChecked) => {
+    return { ...state, authChecked };
+  },
+);

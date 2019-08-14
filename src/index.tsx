@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { AppContainer } from 'react-hot-loader';
 import { ConnectedRouter } from 'connected-react-router';
 import firebase from 'firebase/app';
 import 'firebase/auth';
@@ -27,11 +26,9 @@ firebase.initializeApp(firebaseConfig);
 const store = configureStore();
 
 ReactDOM.render(
-  <AppContainer>
-    <Provider store={store}>
-      <ConnectedRouter history={history}>{routes}</ConnectedRouter>
-    </Provider>
-  </AppContainer>,
+  <Provider store={store}>
+    <ConnectedRouter history={history}>{routes}</ConnectedRouter>
+  </Provider>,
   document.getElementById('root'),
 );
 

@@ -5,7 +5,6 @@ import { RouteComponentProps } from 'react-router';
 
 import { State } from '../reducers';
 import { AppState } from '../modules/App/reducers';
-import appActions from '../modules/App/actions';
 import TopPage from '../components/TopPage';
 
 export interface AppStateToProps {
@@ -18,14 +17,10 @@ function mapStateToProps(state: State) {
   };
 }
 
-export interface AppActionsToProps {
-  changeName: (v: string) => Action<string>;
-}
+export interface AppActionsToProps {}
 
 function mapDispatchToProps(dispatch: Dispatch<Action<string>>) {
-  return {
-    changeName: (v: string) => dispatch(appActions.changeName(v)),
-  };
+  return {};
 }
 
 export type Props = AppStateToProps & AppActionsToProps & RouteComponentProps;

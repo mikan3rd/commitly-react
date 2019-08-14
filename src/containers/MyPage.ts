@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 
 import { State } from '../reducers';
 import { AppState } from '../modules/App/reducers';
-import appActions from '../modules/App/actions';
 import MyPage from '../components/MyPage';
 
 export interface MypageStateToProps {
@@ -17,18 +16,14 @@ function mapStateToProps(state: State) {
   };
 }
 
-export interface MypPageActionsToProps {
-  changeName: (v: string) => Action<string>;
-}
+export interface MypPageActionsToProps {}
 
 function mapDispatchToProps(dispatch: Dispatch<Action<string>>) {
-  return {
-    changeName: (v: string) => dispatch(appActions.changeName(v)),
-  };
+  return {};
 }
 
 export type Props = MypageStateToProps & MypPageActionsToProps;
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(MyPage);
