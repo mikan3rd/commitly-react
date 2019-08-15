@@ -23,9 +23,9 @@ const App = (props: Props) => {
           title: 'ログインしました！',
           time: 4000,
         });
-        chengeAuthChecked(true);
         // TODO: MyPageに遷移させる
         // props.history.push(path.mypage);
+        chengeAuthChecked(true);
       })
       .catch(function(error) {
         console.error(error);
@@ -69,9 +69,9 @@ const App = (props: Props) => {
             <Dropdown text='メニュー' simple item>
               <Dropdown.Menu>
                 {hasCurrentUser ? (
-                  <Dropdown.Item text='ログアウト' onClick={handleLogOut} />
+                  <Dropdown.Item text='ログアウト' icon='sign-out' onClick={handleLogOut} />
                 ) : (
-                  <Dropdown.Item text='ログイン' onClick={handleLogIn} />
+                  <Dropdown.Item text='ログイン' icon='sign-in' onClick={handleLogIn} />
                 )}
               </Dropdown.Menu>
             </Dropdown>
