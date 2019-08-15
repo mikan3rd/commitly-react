@@ -1,6 +1,7 @@
 import React from 'react';
 import firebase from 'firebase/app';
 import { Redirect } from 'react-router';
+import { Dimmer, Loader } from 'semantic-ui-react';
 
 import { path } from '../../routes';
 import { Props } from '../../containers/LoginOnly';
@@ -30,7 +31,11 @@ class LoginOnly extends React.Component<Props> {
     } = this.props;
 
     if (!authChecked) {
-      return <div>Loading...</div>;
+      return (
+        <Dimmer active={true} inverted>
+          <Loader>Loading</Loader>
+        </Dimmer>
+      );
     }
 
     const { currentUser } = firebase.auth();
