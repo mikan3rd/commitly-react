@@ -12,16 +12,18 @@ export const path = {
 };
 
 const routes = (
-  <App>
-    <Switch>
-      <Route exact path={path.topPage} component={TopPage} />
-      <LoginOnly>
-        <Switch>
-          <Route exact path={path.mypage} component={MyPage} />
-        </Switch>
-      </LoginOnly>
-    </Switch>
-  </App>
+  <Switch>
+    <App>
+      <Switch>
+        <Route exact path={path.topPage} component={TopPage} />
+        <LoginOnly>
+          <Switch>
+            <Route exact path={path.mypage} component={MyPage} />
+          </Switch>
+        </LoginOnly>
+      </Switch>
+    </App>
+  </Switch>
 );
 
 export default routes;
