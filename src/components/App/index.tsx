@@ -60,7 +60,7 @@ const App = (props: Props) => {
   return (
     <>
       <div>
-        <Menu fixed='top' color='yellow'>
+        <Menu fixed='top' color='yellow' inverted>
           <Menu.Item as='a' header fitted>
             <Image size='small' src={logo_header} />
           </Menu.Item>
