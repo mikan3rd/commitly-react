@@ -1,7 +1,6 @@
 import React from 'react';
 import firebase from 'firebase/app';
 import { Redirect } from 'react-router';
-import { Dimmer, Loader } from 'semantic-ui-react';
 
 import { path } from '../../routes';
 import { Props } from '../../containers/LoginOnly';
@@ -10,6 +9,7 @@ class LoginOnly extends React.Component<Props> {
   componentDidMount() {
     const {
       appState: { authChecked },
+      changeLoading,
       chengeAuthChecked,
     } = this.props;
     if (!authChecked) {
@@ -17,8 +17,10 @@ class LoginOnly extends React.Component<Props> {
       if (currentUser) {
         chengeAuthChecked(true);
       } else {
+        changeLoading(true);
         firebase.auth().onAuthStateChanged(function(user) {
           chengeAuthChecked(true);
+          changeLoading(false);
         });
       }
     }
@@ -31,11 +33,7 @@ class LoginOnly extends React.Component<Props> {
     } = this.props;
 
     if (!authChecked) {
-      return (
-        <Dimmer active={true} inverted>
-          <Loader>Loading</Loader>
-        </Dimmer>
-      );
+      return null;
     }
 
     const { currentUser } = firebase.auth();

@@ -1,6 +1,6 @@
 import React from 'react';
 import firebase from 'firebase/app';
-import { Container, Image, Menu, Dropdown } from 'semantic-ui-react';
+import { Container, Image, Menu, Dropdown, Dimmer, Loader } from 'semantic-ui-react';
 import { SemanticToastContainer, toast } from 'react-semantic-toasts';
 
 import { Props } from '../../containers/App';
@@ -52,7 +52,7 @@ const App = (props: Props) => {
   };
 
   const {
-    appState: { authChecked },
+    appState: { isLoading, authChecked },
     children,
   } = props;
   const { currentUser } = firebase.auth();
@@ -82,6 +82,10 @@ const App = (props: Props) => {
           {children}
         </Container>
       </div>
+
+      <Dimmer active={isLoading} inverted>
+        <Loader>Loading</Loader>
+      </Dimmer>
       <SemanticToastContainer position='top-center' />
     </>
   );
