@@ -2,11 +2,3 @@ html,
 body {
   background: #f7f7f7;
 }
-
-.ui.inverted.yellow {
-  background-color: #fdd101 !important;
-}
-
-.ui.inverted.menu .ui.item.simple.dropdown {
-  color: black !important;
-}

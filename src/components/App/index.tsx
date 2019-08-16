@@ -61,13 +61,13 @@ const App = (props: Props) => {
   return (
     <>
       <div>
-        <Menu fixed='top' color='yellow' inverted>
+        <TopMenu fixed='top' inverted>
           <Menu.Item as='a' header fitted>
             <Image size='small' src={logo_header} />
           </Menu.Item>
 
           <Menu.Menu position='right'>
-            <Dropdown text='メニュー' simple item>
+            <MenuDropdown text='メニュー' simple item>
               <Dropdown.Menu>
                 {hasCurrentUser ? (
                   <Dropdown.Item text='ログアウト' icon='sign-out' onClick={handleLogOut} />
@@ -75,9 +75,9 @@ const App = (props: Props) => {
                   <Dropdown.Item text='ログイン' icon='sign-in' onClick={handleLogIn} />
                 )}
               </Dropdown.Menu>
-            </Dropdown>
+            </MenuDropdown>
           </Menu.Menu>
-        </Menu>
+        </TopMenu>
 
         <MainContainer text>{children}</MainContainer>
       </div>
@@ -90,6 +90,18 @@ const App = (props: Props) => {
     </>
   );
 };
+
+const TopMenu = styled(Menu)`
+  &&& {
+    background-color: #fdd101 !important;
+  }
+`;
+
+const MenuDropdown = styled(Dropdown)`
+  &&& {
+    color: black !important;
+  }
+`;
 
 const MainContainer = styled(Container)`
   &&& {
