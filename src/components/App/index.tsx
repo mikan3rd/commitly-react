@@ -2,6 +2,7 @@ import React from 'react';
 import firebase from 'firebase/app';
 import { Container, Image, Menu, Dropdown, Dimmer, Loader } from 'semantic-ui-react';
 import { SemanticToastContainer, toast } from 'react-semantic-toasts';
+import styled from 'styled-components';
 
 import { Props } from '../../containers/App';
 
@@ -78,17 +79,22 @@ const App = (props: Props) => {
           </Menu.Menu>
         </Menu>
 
-        <Container text style={{ paddingTop: '3em' }}>
-          {children}
-        </Container>
+        <MainContainer text>{children}</MainContainer>
       </div>
 
       <Dimmer active={isLoading} inverted>
         <Loader>Loading</Loader>
       </Dimmer>
+
       <SemanticToastContainer position='top-center' />
     </>
   );
 };
+
+const MainContainer = styled(Container)`
+  &&& {
+    padding-top: 3em;
+  }
+`;
 
 export default App;

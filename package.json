@@ -20,6 +20,7 @@
     "redux-saga": "^1.0.5",
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^0.87.3",
+    "styled-components": "^4.3.2",
     "typescript": "3.5.3",
     "typescript-fsa": "^3.0.0-beta-2",
     "typescript-fsa-reducers": "^1.2.1"
@@ -51,6 +52,7 @@
     "@types/react-router": "^5.0.3",
     "@types/redux": "^3.6.0",
     "@types/redux-saga": "^0.10.5",
+    "@types/styled-components": "^4.1.18",
     "react-hot-loader": "^4.12.10",
     "tslint": "^5.18.0",
     "tslint-react": "^4.0.0"
