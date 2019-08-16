@@ -2,11 +2,11 @@ import React from 'react';
 import firebase from 'firebase/app';
 import { Container, Image, Menu, Dropdown, Dimmer, Loader } from 'semantic-ui-react';
 import { SemanticToastContainer, toast } from 'react-semantic-toasts';
-import styled from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
+import reset from 'styled-reset';
 
 import { Props } from '../../containers/App';
 
-import './overrides.css';
 import logo_header from '../../images/logo_header.png';
 
 const App = (props: Props) => {
@@ -60,6 +60,7 @@ const App = (props: Props) => {
   const hasCurrentUser = authChecked && currentUser;
   return (
     <>
+      <GlobalStyle />
       <div>
         <TopMenu fixed='top' inverted>
           <Menu.Item as='a' header fitted>
@@ -90,6 +91,13 @@ const App = (props: Props) => {
     </>
   );
 };
+
+const GlobalStyle = createGlobalStyle`
+  ${reset}
+  html, body {
+    background: #f7f7f7 !important;
+  }
+`;
 
 const TopMenu = styled(Menu)`
   &&& {
