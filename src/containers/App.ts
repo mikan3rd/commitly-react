@@ -21,12 +21,14 @@ function mapStateToProps(state: State) {
 
 export interface AppActionsToProps {
   moveTo: (v: string) => Action<any>;
+  changeLoading: (V: boolean) => Action<boolean>;
   chengeAuthChecked: (v: boolean) => Action<boolean>;
 }
 
 function mapDispatchToProps(dispatch: Dispatch<Action<any>>) {
   return {
     moveTo: (v: string) => dispatch(push(v)),
+    changeLoading: (v: boolean) => dispatch(appActions.changeLoading(v)),
     chengeAuthChecked: (v: boolean) => dispatch(appActions.chengeAuthChecked(v)),
   };
 }

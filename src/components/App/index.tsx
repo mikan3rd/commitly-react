@@ -10,9 +10,29 @@ import { Props } from 'containers/App';
 import { path } from 'routes';
 import logo_header from 'images/logo_header.png';
 
-const App = (props: Props) => {
-  const handleLogIn = () => {
-    const { chengeAuthChecked } = props;
+class App extends React.Component<Props> {
+  componentDidMount() {
+    const {
+      appState: { authChecked },
+      changeLoading,
+      chengeAuthChecked,
+    } = this.props;
+    if (!authChecked) {
+      const { currentUser } = firebase.auth();
+      if (currentUser) {
+        chengeAuthChecked(true);
+      } else {
+        changeLoading(true);
+        firebase.auth().onAuthStateChanged(function(user) {
+          chengeAuthChecked(true);
+          changeLoading(false);
+        });
+      }
+    }
+  }
+
+  handleLogIn = () => {
+    const { chengeAuthChecked } = this.props;
     const provider = new firebase.auth.GithubAuthProvider();
     provider.addScope('user');
     firebase
@@ -40,8 +60,8 @@ const App = (props: Props) => {
       });
   };
 
-  const handleLogOut = () => {
-    const { chengeAuthChecked } = props;
+  handleLogOut = () => {
+    const { chengeAuthChecked } = this.props;
     firebase
       .auth()
       .signOut()
@@ -53,49 +73,51 @@ const App = (props: Props) => {
       });
   };
 
-  const {
-    appState: { isLoading, authChecked },
-    moveTo,
-    children,
-  } = props;
-  const { currentUser } = firebase.auth();
-  const hasCurrentUser = authChecked && currentUser;
-  return (
-    <>
-      <GlobalStyle />
-      <div>
-        <TopMenu fixed='top' inverted>
-          <Menu.Item as='a' header fitted onClick={() => moveTo(path.topPage)}>
-            <Image size='small' src={logo_header} />
-          </Menu.Item>
+  render() {
+    const {
+      appState: { isLoading, authChecked },
+      moveTo,
+      children,
+    } = this.props;
+    const { currentUser } = firebase.auth();
+    const hasCurrentUser = authChecked && currentUser;
+    return (
+      <>
+        <GlobalStyle />
+        <div>
+          <TopMenu fixed='top' inverted>
+            <Menu.Item as='a' header fitted onClick={() => moveTo(path.topPage)}>
+              <Image size='small' src={logo_header} />
+            </Menu.Item>
 
-          <Menu.Menu position='right'>
-            <MenuDropdown text='メニュー' simple item>
-              <Dropdown.Menu>
-                {hasCurrentUser ? (
-                  <>
-                    <Dropdown.Item text='マイページ' icon='user' onClick={() => moveTo(path.mypage)} />
-                    <Dropdown.Item text='ログアウト' icon='sign-out' onClick={handleLogOut} />
-                  </>
-                ) : (
-                  <Dropdown.Item text='ログイン' icon='sign-in' onClick={handleLogIn} />
-                )}
-              </Dropdown.Menu>
-            </MenuDropdown>
-          </Menu.Menu>
-        </TopMenu>
+            <Menu.Menu position='right'>
+              <MenuDropdown text='メニュー' simple item>
+                <Dropdown.Menu>
+                  {hasCurrentUser ? (
+                    <>
+                      <Dropdown.Item text='マイページ' icon='user' onClick={() => moveTo(path.mypage)} />
+                      <Dropdown.Item text='ログアウト' icon='sign-out' onClick={this.handleLogOut} />
+                    </>
+                  ) : (
+                    <Dropdown.Item text='ログイン' icon='sign-in' onClick={this.handleLogIn} />
+                  )}
+                </Dropdown.Menu>
+              </MenuDropdown>
+            </Menu.Menu>
+          </TopMenu>
 
-        <MainContainer text>{children}</MainContainer>
-      </div>
+          <MainContainer text>{children}</MainContainer>
+        </div>
 
-      <Dimmer active={isLoading} inverted>
-        <Loader>Loading</Loader>
-      </Dimmer>
+        <Dimmer active={isLoading} inverted>
+          <Loader>Loading</Loader>
+        </Dimmer>
 
-      <SemanticToastContainer position='top-center' />
-    </>
-  );
-};
+        <SemanticToastContainer position='top-center' />
+      </>
+    );
+  }
+}
 
 const GlobalStyle = createGlobalStyle`
   ${reset}
