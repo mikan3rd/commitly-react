@@ -1,12 +1,11 @@
 import React from 'react';
-import { Image, Button, Icon, Header, Grid } from 'semantic-ui-react';
+import { Image, Button, Icon, Header, Grid, Segment } from 'semantic-ui-react';
 import firebase from 'firebase/app';
 import { toast } from 'react-semantic-toasts';
 
 import { Props } from 'containers/TopPage';
 import { path } from 'routes';
-
-import logo from '../../images/logo.png';
+import logo from 'images/logo.png';
 
 const TopPage: React.FC<Props> = props => {
   const signInWithGitHub = () => {
@@ -39,25 +38,29 @@ const TopPage: React.FC<Props> = props => {
 
   return (
     <>
-      <Image src={logo} />
+      <Segment vertical>
+        <Image src={logo} />
 
-      <Grid container verticalAlign='middle'>
-        <Grid.Row stretched>
-          <Grid.Column width='8'>
-            <Header>あなたのコミットを共有しませんか？</Header>
-            <p>Commitlyはあなたの書いたコードをプログラミング言語別に集計して共有するためのサービスです</p>
-          </Grid.Column>
-          <Grid.Column width='8'>
-            <a className='twitter-timeline' data-height='400' href='https://twitter.com/commitly_jp'>
-              Tweets by commitly_jp
-            </a>
-          </Grid.Column>
-        </Grid.Row>
-      </Grid>
+        <Grid container stackable verticalAlign='middle'>
+          <Grid.Row>
+            <Grid.Column width='8'>
+              <Header>あなたのコミットを共有しませんか？</Header>
+              <p>Commitlyはあなたの書いたコードをプログラミング言語別に集計して共有するためのサービスです</p>
+            </Grid.Column>
+            <Grid.Column width='8'>
+              <a className='twitter-timeline' data-height='400' href='https://twitter.com/commitly_jp'>
+                Tweets by commitly_jp
+              </a>
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
+      </Segment>
 
-      <Button color='black' onClick={signInWithGitHub}>
-        <Icon name='github' /> Sign in with GitHub
-      </Button>
+      <Segment vertical>
+        <Button color='black' onClick={signInWithGitHub}>
+          <Icon name='github' /> Sign in with GitHub
+        </Button>
+      </Segment>
     </>
   );
 };
