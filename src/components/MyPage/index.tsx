@@ -3,7 +3,7 @@ import firebase from 'firebase/app';
 import { Button, Icon, Header } from 'semantic-ui-react';
 import { toast } from 'react-semantic-toasts';
 
-import { Props } from '../../containers/MyPage';
+import { Props } from 'containers/MyPage';
 
 const MyPage: React.FC<Props> = props => {
   const signInWithTwitter = () => {

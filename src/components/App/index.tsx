@@ -5,9 +5,8 @@ import { SemanticToastContainer, toast } from 'react-semantic-toasts';
 import styled, { createGlobalStyle } from 'styled-components';
 import reset from 'styled-reset';
 
-import { Props } from '../../containers/App';
-
-import logo_header from '../../images/logo_header.png';
+import { Props } from 'containers/App';
+import logo_header from 'images/logo_header.png';
 
 const App = (props: Props) => {
   const handleLogIn = () => {

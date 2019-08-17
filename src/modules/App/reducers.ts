@@ -1,4 +1,5 @@
 import { reducerWithInitialState } from 'typescript-fsa-reducers';
+
 import actions from './actions';
 
 export interface AppState {

@@ -2,7 +2,7 @@ import { History } from 'history';
 import { combineReducers } from 'redux';
 import { RouterState, connectRouter } from 'connected-react-router';
 
-import { appReducer, AppState } from './modules/App/reducers';
+import { appReducer, AppState } from 'modules/App/reducers';
 
 export interface State {
   router: RouterState;

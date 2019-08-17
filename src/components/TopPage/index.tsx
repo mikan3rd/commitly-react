@@ -3,8 +3,8 @@ import { Image, Button, Icon, Header, Grid } from 'semantic-ui-react';
 import firebase from 'firebase/app';
 import { toast } from 'react-semantic-toasts';
 
-import { Props } from '../../containers/TopPage';
-import { path } from '../../routes';
+import { Props } from 'containers/TopPage';
+import { path } from 'routes';
 
 import logo from '../../images/logo.png';
 

@@ -2,8 +2,8 @@ import React from 'react';
 import firebase from 'firebase/app';
 import { Redirect } from 'react-router';
 
-import { path } from '../../routes';
-import { Props } from '../../containers/LoginOnly';
+import { path } from 'routes';
+import { Props } from 'containers/LoginOnly';
 
 class LoginOnly extends React.Component<Props> {
   componentDidMount() {

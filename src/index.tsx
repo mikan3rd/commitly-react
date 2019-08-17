@@ -5,8 +5,8 @@ import { ConnectedRouter } from 'connected-react-router';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 
-import configureStore, { history } from './configureStore';
-import routes from './routes';
+import configureStore, { history } from 'configureStore';
+import routes from 'routes';
 import * as serviceWorker from './serviceWorker';
 
 import 'semantic-ui-css/semantic.min.css';

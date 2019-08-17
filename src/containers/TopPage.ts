@@ -3,9 +3,9 @@ import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { RouteComponentProps } from 'react-router';
 
-import { State } from '../reducers';
-import { AppState } from '../modules/App/reducers';
-import TopPage from '../components/TopPage';
+import { State } from 'reducers';
+import { AppState } from 'modules/App/reducers';
+import TopPage from 'components/TopPage';
 
 export interface AppStateToProps {
   appState: AppState;
