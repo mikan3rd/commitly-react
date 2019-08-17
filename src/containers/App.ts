@@ -1,6 +1,7 @@
 import { Action } from 'typescript-fsa';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
+import { push } from 'connected-react-router';
 
 import { State } from 'reducers';
 import { AppState } from 'modules/App/reducers';
@@ -19,11 +20,13 @@ function mapStateToProps(state: State) {
 }
 
 export interface AppActionsToProps {
+  moveTo: (v: string) => Action<any>;
   chengeAuthChecked: (v: boolean) => Action<boolean>;
 }
 
 function mapDispatchToProps(dispatch: Dispatch<Action<any>>) {
   return {
+    moveTo: (v: string) => dispatch(push(v)),
     chengeAuthChecked: (v: boolean) => dispatch(appActions.chengeAuthChecked(v)),
   };
 }

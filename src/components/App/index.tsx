@@ -1,4 +1,5 @@
 import React from 'react';
+import { push } from 'connected-react-router';
 import firebase from 'firebase/app';
 import { Container, Image, Menu, Dropdown, Dimmer, Loader } from 'semantic-ui-react';
 import { SemanticToastContainer, toast } from 'react-semantic-toasts';
@@ -6,6 +7,7 @@ import styled, { createGlobalStyle } from 'styled-components';
 import reset from 'styled-reset';
 
 import { Props } from 'containers/App';
+import { path } from 'routes';
 import logo_header from 'images/logo_header.png';
 
 const App = (props: Props) => {
@@ -22,9 +24,9 @@ const App = (props: Props) => {
           type: 'success',
           title: 'ログインしました！',
           time: 4000,
+          animation: 'fade up',
         });
-        // TODO: MyPageに遷移させる
-        // props.history.push(path.mypage);
+        push(path.mypage);
         chengeAuthChecked(true);
       })
       .catch(function(error) {
@@ -53,6 +55,7 @@ const App = (props: Props) => {
 
   const {
     appState: { isLoading, authChecked },
+    moveTo,
     children,
   } = props;
   const { currentUser } = firebase.auth();
@@ -62,7 +65,7 @@ const App = (props: Props) => {
       <GlobalStyle />
       <div>
         <TopMenu fixed='top' inverted>
-          <Menu.Item as='a' header fitted>
+          <Menu.Item as='a' header fitted onClick={() => moveTo(path.topPage)}>
             <Image size='small' src={logo_header} />
           </Menu.Item>
 
@@ -70,7 +73,10 @@ const App = (props: Props) => {
             <MenuDropdown text='メニュー' simple item>
               <Dropdown.Menu>
                 {hasCurrentUser ? (
-                  <Dropdown.Item text='ログアウト' icon='sign-out' onClick={handleLogOut} />
+                  <>
+                    <Dropdown.Item text='マイページ' icon='user' onClick={() => moveTo(path.mypage)} />
+                    <Dropdown.Item text='ログアウト' icon='sign-out' onClick={handleLogOut} />
+                  </>
                 ) : (
                   <Dropdown.Item text='ログイン' icon='sign-in' onClick={handleLogIn} />
                 )}
