@@ -40,7 +40,9 @@ const TopPage: React.FC<Props> = props => {
     <>
       <Segment vertical>
         <Image src={logo} />
+      </Segment>
 
+      <Segment vertical>
         <Grid container stackable verticalAlign='middle'>
           <Grid.Row>
             <Grid.Column width='8'>
