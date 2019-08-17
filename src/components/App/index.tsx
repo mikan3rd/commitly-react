@@ -1,5 +1,4 @@
 import React from 'react';
-import { push } from 'connected-react-router';
 import firebase from 'firebase/app';
 import { Container, Image, Menu, Dropdown, Dimmer, Loader } from 'semantic-ui-react';
 import { SemanticToastContainer, toast } from 'react-semantic-toasts';
@@ -32,7 +31,7 @@ class App extends React.Component<Props> {
   }
 
   handleLogIn = () => {
-    const { chengeAuthChecked } = this.props;
+    const { chengeAuthChecked, moveTo } = this.props;
     const provider = new firebase.auth.GithubAuthProvider();
     provider.addScope('user');
     firebase
@@ -46,7 +45,7 @@ class App extends React.Component<Props> {
           time: 4000,
           animation: 'fade up',
         });
-        push(path.mypage);
+        moveTo(path.mypage);
         chengeAuthChecked(true);
       })
       .catch(function(error) {
