@@ -43,7 +43,6 @@ class App extends React.Component<Props> {
           type: 'success',
           title: 'ログインしました！',
           time: 4000,
-          animation: 'fade up',
         });
         moveTo(path.mypage);
         chengeAuthChecked(true);
