@@ -31,14 +31,14 @@ class App extends React.Component<Props> {
   }
 
   handleLogIn = () => {
-    const { chengeAuthChecked, moveTo } = this.props;
+    const { chengeAuthChecked, moveTo, updateGitHubUser } = this.props;
     const provider = new firebase.auth.GithubAuthProvider();
     provider.addScope('user');
     firebase
       .auth()
       .signInWithPopup(provider)
       .then(function(result) {
-        console.log(result);
+        updateGitHubUser(result);
         toast({
           type: 'success',
           title: 'ログインしました！',
@@ -73,12 +73,11 @@ class App extends React.Component<Props> {
 
   render() {
     const {
-      appState: { isLoading, authChecked },
+      appState: { isLoading },
       moveTo,
       children,
     } = this.props;
     const { currentUser } = firebase.auth();
-    const hasCurrentUser = authChecked && currentUser;
     return (
       <>
         <GlobalStyle />
@@ -91,7 +90,7 @@ class App extends React.Component<Props> {
             <Menu.Menu position='right'>
               <MenuDropdown text='メニュー' simple item>
                 <Dropdown.Menu>
-                  {hasCurrentUser ? (
+                  {currentUser ? (
                     <>
                       <Dropdown.Item text='マイページ' icon='user' onClick={() => moveTo(path.mypage)} />
                       <Dropdown.Item text='ログアウト' icon='sign-out' onClick={this.handleLogOut} />
