@@ -8,16 +8,18 @@ export default function* saga() {
 }
 
 function updateGitHubUser(action: ReturnType<typeof Actions.updateGitHubUser>) {
-  console.log(action.payload);
   const {
     credential: { accessToken },
     additionalUserInfo: { username },
   } = action.payload;
   const requestData = { github_access_token: accessToken, github_user_name: username };
-  console.log(requestData);
 
-  const testFunction = functions.httpsCallable('testFunction');
-  testFunction(requestData).then(function(response) {
-    console.log(response);
-  });
+  const updateGitHubUser = functions.httpsCallable('updateGitHubUser');
+  updateGitHubUser(requestData)
+    .then(response => {
+      console.log(response);
+    })
+    .catch(error => {
+      console.error(error);
+    });
 }
