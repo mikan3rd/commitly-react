@@ -11,11 +11,26 @@ import logo_header from 'images/logo_header.png';
 
 class App extends React.Component<Props> {
   componentDidMount() {
+    this.setFirebaseCurrentUser();
+  }
+
+  componentDidUpdate(prevProps: Props) {
+    const {
+      appState: { authChecked },
+    } = this.props;
+    if (prevProps.appState.authChecked && !authChecked) {
+      console.log('HIT!');
+      this.setFirebaseCurrentUser();
+    }
+  }
+
+  setFirebaseCurrentUser = () => {
     const {
       appState: { authChecked },
       changeLoading,
       chengeAuthChecked,
     } = this.props;
+
     if (!authChecked) {
       const { currentUser } = firebase.auth();
       if (currentUser) {
@@ -28,7 +43,7 @@ class App extends React.Component<Props> {
         });
       }
     }
-  }
+  };
 
   handleLogIn = () => {
     const { chengeAuthChecked, moveTo, updateGitHubUser } = this.props;
