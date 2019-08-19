@@ -1,6 +1,6 @@
 import React from 'react';
 import firebase from 'firebase/app';
-import { Button, Icon, Header } from 'semantic-ui-react';
+import { Button, Icon, Header, Segment } from 'semantic-ui-react';
 import { toast } from 'react-semantic-toasts';
 
 import { Props } from 'containers/MyPage';
@@ -75,19 +75,34 @@ const MyPage: React.FC<Props> = props => {
     const { providerData } = currentUser;
     twitterUserData = providerData.find(d => d && d.providerId === TwitterProviderId);
   }
-  console.log(twitterUserData);
   return (
     <>
-      <Header>MyPage</Header>
-      {twitterUserData ? (
-        <Button color='twitter' onClick={unlinkTwitter}>
-          <Icon name='twitter' /> Twitter Connected
-        </Button>
-      ) : (
-        <Button color='twitter' onClick={signInWithTwitter}>
-          <Icon name='twitter' /> Sign in with Twitter
-        </Button>
-      )}
+      <Segment vertical>
+        <Header as='h1' size='medium'>
+          アカウント設定
+        </Header>
+      </Segment>
+      <Segment vertical>
+        <Header as='h2' size='small'>
+          <Icon name='twitter' />
+          <Header.Content>Twitter連携</Header.Content>
+        </Header>
+        {twitterUserData ? (
+          <>
+            <p>解除するとTwitter関連のサービスが使用できなくなります</p>
+            <Button color='red' onClick={unlinkTwitter}>
+              <Icon name='twitter' /> Cancel Twitter Connect
+            </Button>
+          </>
+        ) : (
+          <>
+            <p>Twitter連携が必要です</p>
+            <Button color='twitter' onClick={signInWithTwitter}>
+              <Icon name='twitter' /> Sign in with Twitter
+            </Button>
+          </>
+        )}
+      </Segment>
     </>
   );
 };
