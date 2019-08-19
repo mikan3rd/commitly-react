@@ -87,6 +87,7 @@ const MyPage: React.FC<Props> = props => {
           <Icon name='twitter' />
           <Header.Content>Twitter連携</Header.Content>
         </Header>
+
         {twitterUserData ? (
           <>
             <p>解除するとTwitter関連のサービスが使用できなくなります</p>

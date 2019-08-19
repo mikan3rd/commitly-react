@@ -1,6 +1,6 @@
 import React from 'react';
 import firebase from 'firebase/app';
-import { Container, Image, Menu, Dropdown, Dimmer, Loader } from 'semantic-ui-react';
+import { Container, Image, Menu, Dropdown, Dimmer, Loader, Segment, Button, Icon } from 'semantic-ui-react';
 import { SemanticToastContainer, toast } from 'react-semantic-toasts';
 import styled, { createGlobalStyle } from 'styled-components';
 import reset from 'styled-reset';
@@ -19,7 +19,6 @@ class App extends React.Component<Props> {
       appState: { authChecked },
     } = this.props;
     if (prevProps.appState.authChecked && !authChecked) {
-      console.log('HIT!');
       this.setFirebaseCurrentUser();
     }
   }
@@ -96,7 +95,7 @@ class App extends React.Component<Props> {
     return (
       <>
         <GlobalStyle />
-        <div>
+        <Wrapper>
           <TopMenu fixed='top' inverted>
             <Menu.Item as='a' header fitted onClick={() => moveTo(path.topPage)}>
               <Image size='small' src={logo_header} />
@@ -119,7 +118,24 @@ class App extends React.Component<Props> {
           </TopMenu>
 
           <MainContainer text>{children}</MainContainer>
-        </div>
+
+          <Footer as='footer' color='grey' inverted attached='bottom'>
+            <Container>
+              <Button
+                color='twitter'
+                icon='twitter'
+                size='mini'
+                as='a'
+                href='https://twitter.com/commitly_jp'
+                target='_blank'
+                rel='noopener noreferrer'
+              >
+                <Icon name='twitter' />
+                @commitly_jp
+              </Button>
+            </Container>
+          </Footer>
+        </Wrapper>
 
         <Dimmer active={isLoading} inverted>
           <Loader>Loading</Loader>
@@ -138,6 +154,12 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
+const Wrapper = styled.div`
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+`;
+
 const TopMenu = styled(Menu)`
   &&& {
     background-color: #fdd101 !important;
@@ -152,7 +174,15 @@ const MenuDropdown = styled(Dropdown)`
 
 const MainContainer = styled(Container)`
   &&& {
+    flex: 1;
     padding-top: 3em;
+  }
+`;
+
+const Footer = styled(Segment)`
+  &&& {
+    background-color: #767676 !important;
+    padding: 1em;
   }
 `;
 

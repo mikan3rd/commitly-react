@@ -56,7 +56,7 @@ class TopPage extends React.Component<Props> {
             <Grid.Row>
               <Grid.Column width='8'>
                 <Header>あなたのコミットを共有しませんか？</Header>
-                <p>Commitlyはあなたの書いたコードをプログラミング言語別に集計して共有するためのサービスです</p>
+                <p>Commitlyはあなたの書いたコードをプログラミング言語別に集計してシェアするためのサービスです</p>
               </Grid.Column>
               <Grid.Column width='8'>
                 <a
@@ -74,6 +74,7 @@ class TopPage extends React.Component<Props> {
         </Segment>
 
         <Segment vertical>
+          <Header>あなたのコミットもシェアしてみませんか？</Header>
           <Button color='black' onClick={this.signInWithGitHub}>
             <Icon name='github' /> Sign in with GitHub
           </Button>
