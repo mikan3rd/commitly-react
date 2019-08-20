@@ -120,20 +120,28 @@ class App extends React.Component<Props> {
           <MainContainer text>{children}</MainContainer>
 
           <Footer as='footer' color='grey' inverted attached='bottom'>
-            <Container>
+            <FooterContainer>
               <Button
+                circular
                 color='twitter'
                 icon='twitter'
-                size='mini'
+                size='small'
                 as='a'
                 href='https://twitter.com/commitly_jp'
                 target='_blank'
                 rel='noopener noreferrer'
-              >
-                <Icon name='twitter' />
-                @commitly_jp
-              </Button>
-            </Container>
+              />
+              <Button
+                circular
+                color='black'
+                icon='github'
+                size='small'
+                as='a'
+                href='https://github.com/mikan3rd/commitly'
+                target='_blank'
+                rel='noopener noreferrer'
+              />
+            </FooterContainer>
           </Footer>
         </Wrapper>
 
@@ -183,6 +191,14 @@ const Footer = styled(Segment)`
   &&& {
     background-color: #767676 !important;
     padding: 1em;
+  }
+`;
+
+const FooterContainer = styled(Container)`
+  &&& {
+    > * {
+      margin-right: 15px;
+    }
   }
 `;
 
