@@ -16,11 +16,7 @@ function updateGitHubUser(action: ReturnType<typeof Actions.updateGitHubUser>) {
   const requestData = { github_access_token: accessToken, github_user_name: username };
 
   const updateGitHubUser = functions.httpsCallable('updateGitHubUser');
-  updateGitHubUser(requestData)
-    .then(response => {
-      console.log(response);
-    })
-    .catch(error => {
-      console.error(error);
-    });
+  updateGitHubUser(requestData).catch(error => {
+    console.error(error);
+  });
 }

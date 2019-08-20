@@ -1,7 +1,8 @@
 import React from 'react';
 import firebase from 'firebase/app';
-import { Button, Icon, Header, Segment } from 'semantic-ui-react';
+import { Button, Icon, Header, Segment, Label } from 'semantic-ui-react';
 import { toast } from 'react-semantic-toasts';
+import styled from 'styled-components';
 
 import { Props } from 'containers/MyPage';
 
@@ -17,8 +18,9 @@ const MyPage: React.FC<Props> = props => {
     if (currentUser) {
       currentUser
         .linkWithPopup(provider)
-        .then(function(result) {
-          console.log(result);
+        .then(result => {
+          const { additionalUserInfo } = result;
+          console.log(additionalUserInfo);
           chengeAuthChecked(false);
           updateTwitterUser(result);
           toast({
@@ -28,7 +30,7 @@ const MyPage: React.FC<Props> = props => {
             time: 4000,
           });
         })
-        .catch(function(error) {
+        .catch(error => {
           console.error(error);
           toast({
             type: 'error',
@@ -91,14 +93,18 @@ const MyPage: React.FC<Props> = props => {
 
         {twitterUserData ? (
           <>
-            <p>解除するとTwitter関連のサービスが使用できなくなります</p>
+            <Label as='a' image size='big'>
+              <img src={twitterUserData.photoURL || undefined} alt={twitterUserData.displayName || undefined} />
+              {twitterUserData.displayName}
+            </Label>
+            <Text>解除するとTwitter関連のサービスが使用できなくなります</Text>
             <Button color='red' onClick={unlinkTwitter}>
               <Icon name='twitter' /> Cancel Twitter Connect
             </Button>
           </>
         ) : (
           <>
-            <p>Twitter連携が必要です</p>
+            <p>サービスの利用にはTwitter連携が必要です</p>
             <Button color='twitter' onClick={signInWithTwitter}>
               <Icon name='twitter' /> Sign in with Twitter
             </Button>
@@ -108,5 +114,9 @@ const MyPage: React.FC<Props> = props => {
     </>
   );
 };
+
+const Text = styled.p`
+  margin-top: 1em;
+`;
 
 export default MyPage;

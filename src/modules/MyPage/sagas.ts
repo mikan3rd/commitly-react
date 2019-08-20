@@ -21,22 +21,14 @@ function updateTwitterUser(action: ReturnType<typeof Actions.updateTwitterUser>)
   };
 
   const updateTwitterUser = functions.httpsCallable('updateTwitterUser');
-  updateTwitterUser(requestData)
-    .then(response => {
-      console.log(response);
-    })
-    .catch(error => {
-      console.error(error);
-    });
+  updateTwitterUser(requestData).catch(error => {
+    console.error(error);
+  });
 }
 
 function deleteTwitterUser(action: ReturnType<typeof Actions.deleteTwitterUser>) {
   const deleteTwitterUser = functions.httpsCallable('deleteTwitterUser');
-  deleteTwitterUser()
-    .then(response => {
-      console.log(response);
-    })
-    .catch(error => {
-      console.error(error);
-    });
+  deleteTwitterUser().catch(error => {
+    console.error(error);
+  });
 }
