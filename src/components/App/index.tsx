@@ -1,6 +1,6 @@
 import React from 'react';
 import firebase from 'firebase/app';
-import { Container, Image, Menu, Dropdown, Dimmer, Loader, Segment, Button, Icon } from 'semantic-ui-react';
+import { Container, Image, Menu, Dropdown, Dimmer, Loader, Segment, Button } from 'semantic-ui-react';
 import { SemanticToastContainer, toast } from 'react-semantic-toasts';
 import styled, { createGlobalStyle } from 'styled-components';
 import reset from 'styled-reset';
