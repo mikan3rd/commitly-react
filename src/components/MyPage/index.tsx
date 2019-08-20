@@ -72,6 +72,10 @@ const MyPage: React.FC<Props> = props => {
     }
   };
 
+  const {
+    appState: { loginUser },
+  } = props;
+
   let twitterUserData;
   const { currentUser } = firebase.auth();
   if (currentUser) {
@@ -93,9 +97,16 @@ const MyPage: React.FC<Props> = props => {
 
         {twitterUserData ? (
           <>
-            <Label as='a' image size='big'>
-              <img src={twitterUserData.photoURL || undefined} alt={twitterUserData.displayName || undefined} />
-              {twitterUserData.displayName}
+            <Label
+              as='a'
+              image
+              size='big'
+              href={`https://twitter.com/${loginUser.twitter_screen_name}`}
+              target='_blank'
+              rel='noopener noreferrer'
+            >
+              <img src={twitterUserData.photoURL || undefined} alt={twitterUserData.displayName || undefined} />@
+              {loginUser.twitter_screen_name}
             </Label>
             <Text>解除するとTwitter関連のサービスが使用できなくなります</Text>
             <Button color='red' onClick={unlinkTwitter}>

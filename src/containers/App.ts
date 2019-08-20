@@ -23,6 +23,7 @@ export interface AppActionsToProps {
   moveTo: (v: string) => Action<any>;
   changeLoading: (V: boolean) => Action<boolean>;
   chengeAuthChecked: (v: boolean) => Action<boolean>;
+  getLoginUser: () => Action<void>;
   updateGitHubUser: (v: any) => Action<any>;
 }
 
@@ -31,6 +32,7 @@ function mapDispatchToProps(dispatch: Dispatch<Action<any>>) {
     moveTo: (v: string) => dispatch(push(v)),
     changeLoading: (v: boolean) => dispatch(appActions.changeLoading(v)),
     chengeAuthChecked: (v: boolean) => dispatch(appActions.chengeAuthChecked(v)),
+    getLoginUser: () => dispatch(appActions.getLoginUser()),
     updateGitHubUser: (v: any) => dispatch(appActions.updateGitHubUser(v)),
   };
 }
