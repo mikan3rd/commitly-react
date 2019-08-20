@@ -42,13 +42,14 @@ const MyPage: React.FC<Props> = props => {
   };
 
   const unlinkTwitter = () => {
-    const { chengeAuthChecked } = props;
+    const { chengeAuthChecked, deleteTwitterUser } = props;
     const { currentUser } = firebase.auth();
     if (currentUser) {
       currentUser
         .unlink(TwitterProviderId)
         .then(function() {
           chengeAuthChecked(false);
+          deleteTwitterUser();
           toast({
             type: 'success',
             icon: 'twitter',

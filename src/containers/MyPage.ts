@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { State } from 'reducers';
 import { AppState } from 'modules/App/reducers';
 import appActions from 'modules/App/actions';
+import myPageActions from 'modules/MyPage/actions';
 import MyPage from 'components/MyPage';
 
 export interface MypageStateToProps {
@@ -20,12 +21,14 @@ function mapStateToProps(state: State) {
 export interface MypPageActionsToProps {
   chengeAuthChecked: (v: boolean) => Action<boolean>;
   updateTwitterUser: (v: any) => Action<any>;
+  deleteTwitterUser: () => Action<void>;
 }
 
 function mapDispatchToProps(dispatch: Dispatch<Action<any>>) {
   return {
     chengeAuthChecked: (v: boolean) => dispatch(appActions.chengeAuthChecked(v)),
-    updateTwitterUser: (v: any) => dispatch(appActions.updateTwitterUser(v)),
+    updateTwitterUser: (v: any) => dispatch(myPageActions.updateTwitterUser(v)),
+    deleteTwitterUser: () => dispatch(myPageActions.deleteTwitterUser()),
   };
 }
 
