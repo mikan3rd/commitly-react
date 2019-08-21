@@ -109,7 +109,7 @@ const MyPage: React.FC<Props> = props => {
               {loginUser.twitter_screen_name}
             </Label>
             <Text>解除するとTwitter関連のサービスが使用できなくなります</Text>
-            <Button color='red' onClick={unlinkTwitter}>
+            <Button color='red' size='tiny' onClick={unlinkTwitter}>
               <Icon name='twitter' /> Cancel Twitter Connect
             </Button>
           </>

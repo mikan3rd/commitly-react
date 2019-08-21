@@ -5,13 +5,13 @@ import actions from './actions';
 export interface AppState {
   isLoading: boolean;
   authChecked: boolean;
-  loginUser: any;
+  loginUser?: any;
 }
 
 const initialState: AppState = {
   isLoading: false,
   authChecked: false,
-  loginUser: {},
+  loginUser: null,
 };
 
 export const appReducer = reducerWithInitialState(initialState)
