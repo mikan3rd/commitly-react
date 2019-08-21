@@ -26,7 +26,7 @@ class App extends React.Component<Props> {
   setFirebaseCurrentUser = () => {
     const {
       appState: { authChecked },
-      changeLoading,
+      setLoading,
       chengeAuthChecked,
       getLoginUser,
     } = this.props;
@@ -37,10 +37,9 @@ class App extends React.Component<Props> {
         getLoginUser();
         chengeAuthChecked(true);
       } else {
-        changeLoading(true);
+        setLoading(true);
         firebase.auth().onAuthStateChanged(user => {
           chengeAuthChecked(true);
-          changeLoading(false);
           if (user) {
             getLoginUser();
           }

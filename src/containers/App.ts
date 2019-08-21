@@ -21,7 +21,7 @@ function mapStateToProps(state: State) {
 
 export interface AppActionsToProps {
   moveTo: (v: string) => Action<any>;
-  changeLoading: (V: boolean) => Action<boolean>;
+  setLoading: (V: boolean) => Action<boolean>;
   chengeAuthChecked: (v: boolean) => Action<boolean>;
   getLoginUser: () => Action<void>;
   updateGitHubUser: (v: any) => Action<any>;
@@ -30,7 +30,7 @@ export interface AppActionsToProps {
 function mapDispatchToProps(dispatch: Dispatch<Action<any>>) {
   return {
     moveTo: (v: string) => dispatch(push(v)),
-    changeLoading: (v: boolean) => dispatch(appActions.changeLoading(v)),
+    setLoading: (v: boolean) => dispatch(appActions.setLoading(v)),
     chengeAuthChecked: (v: boolean) => dispatch(appActions.chengeAuthChecked(v)),
     getLoginUser: () => dispatch(appActions.getLoginUser()),
     updateGitHubUser: (v: any) => dispatch(appActions.updateGitHubUser(v)),

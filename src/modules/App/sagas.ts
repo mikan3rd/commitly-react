@@ -9,9 +9,15 @@ export default function* saga() {
 }
 
 function* getLoginUser(action: ReturnType<typeof Actions.updateGitHubUser>) {
+  yield put(Actions.setLoading(true));
   const getLoginUser = functions.httpsCallable('getLoginUser');
-  const response = yield getLoginUser();
-  yield put(Actions.setLoginUser(response.data));
+  try {
+    const response = yield getLoginUser();
+    yield put(Actions.setLoginUser(response.data));
+  } catch (error) {
+    console.log(error);
+  }
+  yield put(Actions.setLoading(false));
 }
 
 function updateGitHubUser(action: ReturnType<typeof Actions.updateGitHubUser>) {

@@ -18,7 +18,7 @@ export const appReducer = reducerWithInitialState(initialState)
   .case(actions.setLoginUser, (state, loginUser) => {
     return { ...state, loginUser };
   })
-  .case(actions.changeLoading, (state, isLoading) => {
+  .case(actions.setLoading, (state, isLoading) => {
     return { ...state, isLoading };
   })
   .case(actions.chengeAuthChecked, (state, authChecked) => {
