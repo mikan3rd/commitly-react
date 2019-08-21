@@ -1,7 +1,8 @@
 import React from 'react';
-import { Image, Button, Icon, Header, Grid, Segment } from 'semantic-ui-react';
+import { Image, Button, Icon, Header, Grid, Segment, Label } from 'semantic-ui-react';
 import firebase from 'firebase/app';
 import { toast } from 'react-semantic-toasts';
+import styled from 'styled-components';
 
 import { Props } from 'containers/TopPage';
 import { path } from 'routes';
@@ -73,15 +74,27 @@ class TopPage extends React.Component<Props> {
           </Grid>
         </Segment>
 
-        <Segment vertical>
+        <Segment vertical textAlign='center' padded='very'>
           <Header>あなたのコミットもシェアしてみませんか？</Header>
-          <Button color='black' onClick={this.signInWithGitHub}>
-            <Icon name='github' /> Sign in with GitHub
-          </Button>
+
+          <AlignMiddle>
+            <Button color='black' onClick={this.signInWithGitHub}>
+              <Icon name='github' /> Sign in with GitHub
+            </Button>
+            <Label pointing='left' size='big' color='blue'>
+              Join Now!!
+            </Label>
+          </AlignMiddle>
         </Segment>
       </>
     );
   }
 }
+
+const AlignMiddle = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
 
 export default TopPage;
