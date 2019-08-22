@@ -77,6 +77,7 @@ const MyPage: React.FC<Props> = props => {
   } = props;
 
   let twitterUserData;
+
   const { currentUser } = firebase.auth();
   if (currentUser) {
     const { providerData } = currentUser;
@@ -97,14 +98,7 @@ const MyPage: React.FC<Props> = props => {
 
         {twitterUserData ? (
           <>
-            <Label
-              as='a'
-              image
-              size='big'
-              href={`https://twitter.com/${loginUser.twitter_screen_name}`}
-              target='_blank'
-              rel='noopener noreferrer'
-            >
+            <Label image size='big'>
               <img src={twitterUserData.photoURL || undefined} alt={twitterUserData.displayName || undefined} />@
               {loginUser.twitter_screen_name}
             </Label>

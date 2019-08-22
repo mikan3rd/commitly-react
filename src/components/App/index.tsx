@@ -1,6 +1,6 @@
 import React from 'react';
 import firebase from 'firebase/app';
-import { Container, Image, Menu, Dropdown, Dimmer, Loader, Segment, Button } from 'semantic-ui-react';
+import { Container, Image, Menu, Dropdown, Dimmer, Loader, Segment, Button, Card } from 'semantic-ui-react';
 import { SemanticToastContainer, toast } from 'react-semantic-toasts';
 import styled, { createGlobalStyle } from 'styled-components';
 import reset from 'styled-reset';
@@ -8,6 +8,8 @@ import reset from 'styled-reset';
 import { Props } from 'containers/App';
 import { path } from 'routes';
 import logo_header from 'images/logo_header.png';
+
+const GithubProviderId = 'github.com';
 
 class App extends React.Component<Props> {
   componentDidMount() {
@@ -91,11 +93,20 @@ class App extends React.Component<Props> {
 
   render() {
     const {
-      appState: { isLoading },
+      appState: { isLoading, loginUser },
       moveTo,
       children,
     } = this.props;
+
+    let githubData;
+
     const { currentUser } = firebase.auth();
+    if (currentUser) {
+      const { providerData } = currentUser;
+      githubData = providerData.find(d => d && d.providerId === GithubProviderId);
+    }
+
+    console.log(githubData);
     return (
       <>
         <GlobalStyle />
@@ -108,8 +119,15 @@ class App extends React.Component<Props> {
             <Menu.Menu position='right'>
               <MenuDropdown text='メニュー' simple item>
                 <Dropdown.Menu>
-                  {currentUser ? (
+                  {currentUser && loginUser ? (
                     <>
+                      <MenuCard>
+                        <Card.Content>
+                          <MenuCardImage floated='right' size='mini' src={githubData && githubData.photoURL} />
+                          <MenuCardHeader>{loginUser.github_user_name}</MenuCardHeader>
+                          <MenuCardMeta>{githubData && githubData.email}</MenuCardMeta>
+                        </Card.Content>
+                      </MenuCard>
                       <Dropdown.Item text='マイページ' icon='user' onClick={() => moveTo(path.mypage)} />
                       <Dropdown.Item text='ログアウト' icon='sign-out' onClick={this.handleLogOut} />
                     </>
@@ -188,6 +206,36 @@ const MainContainer = styled(Container)`
   &&& {
     flex: 1;
     padding-top: 3em;
+  }
+`;
+
+const MenuCard = styled(Card)`
+  &&& {
+    margin: 0;
+    box-shadow: none;
+    max-width: 250px;
+    border-bottom: 1px solid rgba(34, 36, 38, 0.1);
+    border-radius: 0;
+  }
+`;
+
+const MenuCardImage = styled(Image)`
+  &&& {
+    margin-bottom: 0 !important;
+  }
+`;
+
+const MenuCardHeader = styled(Card.Header)`
+  &&& {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+`;
+
+const MenuCardMeta = styled(Card.Meta)`
+  &&& {
+    white-space: pre-wrap;
+    word-wrap: break-word;
   }
 `;
 

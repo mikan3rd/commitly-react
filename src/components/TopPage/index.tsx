@@ -23,8 +23,7 @@ class TopPage extends React.Component<Props> {
     firebase
       .auth()
       .signInWithPopup(provider)
-      .then(function(result) {
-        console.log(result);
+      .then(result => {
         toast({
           type: 'success',
           icon: 'github',
@@ -33,7 +32,7 @@ class TopPage extends React.Component<Props> {
         });
         history.push(path.mypage);
       })
-      .catch(function(error) {
+      .catch(error => {
         console.error(error);
         toast({
           type: 'error',
@@ -76,7 +75,6 @@ class TopPage extends React.Component<Props> {
 
         <Segment vertical textAlign='center' padded='very'>
           <Header>あなたのコミットもシェアしてみませんか？</Header>
-
           <AlignMiddle>
             <Button color='black' onClick={this.signInWithGitHub}>
               <Icon name='github' /> Sign in with GitHub
