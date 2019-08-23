@@ -83,10 +83,10 @@ class App extends React.Component<Props> {
     firebase
       .auth()
       .signOut()
-      .then(function() {
+      .then(() => {
         chengeAuthChecked(false);
       })
-      .catch(function(error) {
+      .catch(error => {
         console.error(error);
       });
   };
@@ -106,7 +106,6 @@ class App extends React.Component<Props> {
       githubData = providerData.find(d => d && d.providerId === GithubProviderId);
     }
 
-    console.log(githubData);
     return (
       <>
         <GlobalStyle />
