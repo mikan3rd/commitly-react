@@ -17,13 +17,14 @@ class TopPage extends React.Component<Props> {
   }
 
   signInWithGitHub = () => {
-    const { history } = this.props;
+    const { history, updateGitHubUser } = this.props;
     const provider = new firebase.auth.GithubAuthProvider();
     provider.addScope('user');
     firebase
       .auth()
       .signInWithPopup(provider)
       .then(result => {
+        updateGitHubUser(result);
         toast({
           type: 'success',
           icon: 'github',

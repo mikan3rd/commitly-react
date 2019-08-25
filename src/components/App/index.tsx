@@ -53,13 +53,14 @@ class App extends React.Component<Props> {
   };
 
   handleLogIn = () => {
-    const { chengeAuthChecked, moveTo, updateGitHubUser } = this.props;
+    const { moveTo, updateGitHubUser } = this.props;
     const provider = new firebase.auth.GithubAuthProvider();
     provider.addScope('user');
     firebase
       .auth()
       .signInWithPopup(provider)
-      .then(function(result) {
+      .then(result => {
+        console.log('result', result);
         updateGitHubUser(result);
         toast({
           type: 'success',
@@ -67,9 +68,8 @@ class App extends React.Component<Props> {
           time: 4000,
         });
         moveTo(path.mypage);
-        chengeAuthChecked(true);
       })
-      .catch(function(error) {
+      .catch(error => {
         console.error(error);
         toast({
           type: 'error',
