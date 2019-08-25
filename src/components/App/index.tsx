@@ -87,6 +87,11 @@ class App extends React.Component<Props> {
       .signOut()
       .then(() => {
         chengeAuthChecked(false);
+        toast({
+          type: 'success',
+          title: 'ログアウトしました！',
+          time: 4000,
+        });
       })
       .catch(error => {
         console.error(error);
