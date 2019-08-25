@@ -2,6 +2,7 @@ import { createBrowserHistory } from 'history';
 import { applyMiddleware, compose, createStore } from 'redux';
 import { routerMiddleware } from 'connected-react-router';
 import createSagaMiddleware from 'redux-saga';
+import { createLogger } from 'redux-logger';
 
 import createRootReducer from 'reducers';
 import rootSaga from 'sagas';
@@ -10,7 +11,7 @@ export const history = createBrowserHistory();
 
 export default function configureStore(preloadedState?: any) {
   const sagaMiddleware = createSagaMiddleware();
-  const middleWares = [routerMiddleware(history), sagaMiddleware];
+  const middleWares = [routerMiddleware(history), sagaMiddleware, createLogger()];
   const store = createStore(createRootReducer(history), preloadedState, compose(applyMiddleware(...middleWares)));
   sagaMiddleware.run(rootSaga);
 

@@ -44,6 +44,8 @@ class App extends React.Component<Props> {
           chengeAuthChecked(true);
           if (user) {
             getLoginUser();
+          } else {
+            setLoading(false);
           }
         });
       }
