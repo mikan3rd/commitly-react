@@ -95,6 +95,12 @@ class App extends React.Component<Props> {
       })
       .catch(error => {
         console.error(error);
+        toast({
+          type: 'error',
+          title: 'ログアウトに失敗しました...',
+          description: error.message,
+          time: 8000,
+        });
       });
   };
 

@@ -46,6 +46,9 @@ class TopPage extends React.Component<Props> {
   };
 
   render() {
+    const {
+      appState: { loginUser },
+    } = this.props;
     return (
       <>
         <Segment vertical>
@@ -74,17 +77,19 @@ class TopPage extends React.Component<Props> {
           </Grid>
         </Segment>
 
-        <Segment vertical textAlign='center' padded='very'>
-          <Header>あなたのコミットもシェアしてみませんか？</Header>
-          <AlignMiddle>
-            <Button color='black' onClick={this.signInWithGitHub}>
-              <Icon name='github' /> Sign in with GitHub
-            </Button>
-            <Label pointing='left' size='big' color='blue'>
-              Join Now!!
-            </Label>
-          </AlignMiddle>
-        </Segment>
+        {!loginUser && (
+          <Segment vertical textAlign='center' padded='very'>
+            <Header>あなたのコミットもシェアしてみませんか？</Header>
+            <AlignMiddle onClick={this.signInWithGitHub}>
+              <Button color='black'>
+                <Icon name='github' /> Sign in with GitHub
+              </Button>
+              <Label pointing='left' size='big' color='blue'>
+                Join Now!!
+              </Label>
+            </AlignMiddle>
+          </Segment>
+        )}
       </>
     );
   }
