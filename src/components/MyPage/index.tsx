@@ -90,6 +90,19 @@ const MyPage: React.FC<Props> = props => {
           アカウント設定
         </Header>
       </Segment>
+
+      <Segment vertical>
+        <Header as='h2' size='small'>
+          <Icon name='github' />
+          <Header.Content>GitHub連携</Header.Content>
+        </Header>
+
+        <p>Github App のインストールが必要です</p>
+        <Button as='a' color='black' href='https://github.com/apps/commitly' target='_blank' rel='noopener noreferrer'>
+          <Icon name='github' /> Go to GitHub App
+        </Button>
+      </Segment>
+
       <Segment vertical>
         <Header as='h2' size='small'>
           <Icon name='twitter' />

@@ -23,10 +23,19 @@ function* getLoginUser(action: ReturnType<typeof Actions.updateGitHubUser>) {
 function updateGitHubUser(action: ReturnType<typeof Actions.updateGitHubUser>) {
   const {
     credential: { accessToken },
-    additionalUserInfo: { username },
+    additionalUserInfo: {
+      username,
+      isNewUser,
+      profile: { id },
+    },
   } = action.payload;
 
-  const requestData = { github_access_token: accessToken, github_user_name: username };
+  const requestData = {
+    github_access_token: accessToken,
+    github_user_name: username,
+    github_user_id: id,
+    is_new_user: isNewUser,
+  };
 
   const updateGitHubUser = functions.httpsCallable('updateGitHubUser');
   updateGitHubUser(requestData).catch(error => {
