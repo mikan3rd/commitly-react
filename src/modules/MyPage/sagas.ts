@@ -1,14 +1,15 @@
-import { takeLatest } from 'redux-saga/effects';
+import { takeLatest, put } from 'redux-saga/effects';
 
 import Actions from './actions';
 import { functions } from 'index';
+import appActions from 'modules/App/actions';
 
 export default function* saga() {
   yield takeLatest(Actions.updateTwitterUser, updateTwitterUser);
   yield takeLatest(Actions.deleteTwitterUser, deleteTwitterUser);
 }
 
-function updateTwitterUser(action: ReturnType<typeof Actions.updateTwitterUser>) {
+function* updateTwitterUser(action: ReturnType<typeof Actions.updateTwitterUser>) {
   const {
     credential: { accessToken, secret },
     additionalUserInfo: { username },
@@ -21,9 +22,12 @@ function updateTwitterUser(action: ReturnType<typeof Actions.updateTwitterUser>)
   };
 
   const updateTwitterUser = functions.httpsCallable('updateTwitterUser');
-  updateTwitterUser(requestData).catch(error => {
-    console.error(error);
-  });
+  try {
+    yield updateTwitterUser(requestData);
+    yield put(appActions.getLoginUser());
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 function deleteTwitterUser(action: ReturnType<typeof Actions.deleteTwitterUser>) {

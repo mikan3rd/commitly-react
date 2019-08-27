@@ -10,7 +10,7 @@ export default function* saga() {
   yield takeLatest(Actions.updateGitHubUser, updateGitHubUser);
 }
 
-function* getLoginUser(action: ReturnType<typeof Actions.updateGitHubUser>) {
+function* getLoginUser(action: ReturnType<typeof Actions.getLoginUser>) {
   yield put(Actions.setLoading(true));
   const getLoginUser = functions.httpsCallable('getLoginUser');
   try {
@@ -23,6 +23,8 @@ function* getLoginUser(action: ReturnType<typeof Actions.updateGitHubUser>) {
 }
 
 function* updateGitHubUser(action: ReturnType<typeof Actions.updateGitHubUser>) {
+  yield put(Actions.setLoading(true));
+
   const {
     credential: { accessToken },
     additionalUserInfo: {
@@ -43,10 +45,10 @@ function* updateGitHubUser(action: ReturnType<typeof Actions.updateGitHubUser>) 
 
   try {
     yield updateGitHubUser(requestData);
+    yield put(push(path.mypage));
   } catch (error) {
     console.log(error);
-    return;
   }
 
-  yield put(push(path.mypage));
+  yield put(Actions.setLoading(false));
 }
