@@ -1,7 +1,9 @@
 import { takeLatest, put } from 'redux-saga/effects';
+import { push } from 'connected-react-router';
 
 import Actions from './actions';
 import { functions } from 'index';
+import { path } from 'routes';
 
 export default function* saga() {
   yield takeLatest(Actions.getLoginUser, getLoginUser);
@@ -20,7 +22,7 @@ function* getLoginUser(action: ReturnType<typeof Actions.updateGitHubUser>) {
   yield put(Actions.setLoading(false));
 }
 
-function updateGitHubUser(action: ReturnType<typeof Actions.updateGitHubUser>) {
+function* updateGitHubUser(action: ReturnType<typeof Actions.updateGitHubUser>) {
   const {
     credential: { accessToken },
     additionalUserInfo: {
@@ -38,7 +40,13 @@ function updateGitHubUser(action: ReturnType<typeof Actions.updateGitHubUser>) {
   };
 
   const updateGitHubUser = functions.httpsCallable('updateGitHubUser');
-  updateGitHubUser(requestData).catch(error => {
-    console.error(error);
-  });
+
+  try {
+    yield updateGitHubUser(requestData);
+  } catch (error) {
+    console.log(error);
+    return;
+  }
+
+  yield put(push(path.mypage));
 }

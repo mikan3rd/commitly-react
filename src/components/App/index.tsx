@@ -53,7 +53,7 @@ class App extends React.Component<Props> {
   };
 
   handleLogIn = () => {
-    const { moveTo, updateGitHubUser } = this.props;
+    const { updateGitHubUser } = this.props;
     const provider = new firebase.auth.GithubAuthProvider();
     provider.addScope('user');
     firebase
@@ -67,7 +67,6 @@ class App extends React.Component<Props> {
           title: 'ログインしました！',
           time: 4000,
         });
-        moveTo(path.mypage);
       })
       .catch(error => {
         console.error(error);

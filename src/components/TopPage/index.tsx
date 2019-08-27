@@ -5,7 +5,6 @@ import { toast } from 'react-semantic-toasts';
 import styled from 'styled-components';
 
 import { Props } from 'containers/TopPage';
-import { path } from 'routes';
 import logo from 'images/logo.png';
 
 class TopPage extends React.Component<Props> {
@@ -17,7 +16,7 @@ class TopPage extends React.Component<Props> {
   }
 
   signInWithGitHub = () => {
-    const { history, updateGitHubUser } = this.props;
+    const { updateGitHubUser } = this.props;
     const provider = new firebase.auth.GithubAuthProvider();
     provider.addScope('user');
     firebase
@@ -31,7 +30,6 @@ class TopPage extends React.Component<Props> {
           title: 'GitHub連携に成功しました！',
           time: 4000,
         });
-        history.push(path.mypage);
       })
       .catch(error => {
         console.error(error);
