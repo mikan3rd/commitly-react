@@ -22,6 +22,7 @@ export interface MypPageActionsToProps {
   chengeAuthChecked: (v: boolean) => Action<boolean>;
   updateTwitterUser: (v: any) => Action<any>;
   deleteTwitterUser: () => Action<void>;
+  updateGithubRepositories: () => Action<any>;
 }
 
 function mapDispatchToProps(dispatch: Dispatch<Action<any>>) {
@@ -29,6 +30,7 @@ function mapDispatchToProps(dispatch: Dispatch<Action<any>>) {
     chengeAuthChecked: (v: boolean) => dispatch(appActions.chengeAuthChecked(v)),
     updateTwitterUser: (v: any) => dispatch(myPageActions.updateTwitterUser(v)),
     deleteTwitterUser: () => dispatch(myPageActions.deleteTwitterUser()),
+    updateGithubRepositories: () => dispatch(myPageActions.updateGithubRepositories()),
   };
 }
 

@@ -55,7 +55,7 @@ class App extends React.Component<Props> {
   handleLogIn = () => {
     const { updateGitHubUser } = this.props;
     const provider = new firebase.auth.GithubAuthProvider();
-    provider.addScope('user');
+    provider.addScope('read:user read:org');
     firebase
       .auth()
       .signInWithPopup(provider)

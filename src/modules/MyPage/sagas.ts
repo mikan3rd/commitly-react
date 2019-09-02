@@ -7,6 +7,7 @@ import appActions from 'modules/App/actions';
 export default function* saga() {
   yield takeLatest(Actions.updateTwitterUser, updateTwitterUser);
   yield takeLatest(Actions.deleteTwitterUser, deleteTwitterUser);
+  yield takeLatest(Actions.updateGithubRepositories, updateGithubRepositories);
 }
 
 function* updateTwitterUser(action: ReturnType<typeof Actions.updateTwitterUser>) {
@@ -35,4 +36,14 @@ function deleteTwitterUser(action: ReturnType<typeof Actions.deleteTwitterUser>)
   deleteTwitterUser().catch(error => {
     console.error(error);
   });
+}
+
+function* updateGithubRepositories(action: ReturnType<typeof Actions.updateGithubRepositories>) {
+  const updateGithubRepositories = functions.httpsCallable('updateGithubRepositories');
+  try {
+    yield updateGithubRepositories();
+    yield put(appActions.getLoginUser());
+  } catch (error) {
+    console.log(error);
+  }
 }

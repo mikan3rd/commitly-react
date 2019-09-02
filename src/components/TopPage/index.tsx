@@ -18,7 +18,7 @@ class TopPage extends React.Component<Props> {
   signInWithGitHub = () => {
     const { updateGitHubUser } = this.props;
     const provider = new firebase.auth.GithubAuthProvider();
-    provider.addScope('user');
+    provider.addScope('user,read:org');
     firebase
       .auth()
       .signInWithPopup(provider)
