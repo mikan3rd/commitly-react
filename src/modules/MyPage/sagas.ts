@@ -39,6 +39,7 @@ function deleteTwitterUser(action: ReturnType<typeof Actions.deleteTwitterUser>)
 }
 
 function* updateGithubRepositories(action: ReturnType<typeof Actions.updateGithubRepositories>) {
+  yield put(Actions.setRepositoryLoading(true));
   const updateGithubRepositories = functions.httpsCallable('updateGithubRepositories');
   try {
     yield updateGithubRepositories();
@@ -46,4 +47,5 @@ function* updateGithubRepositories(action: ReturnType<typeof Actions.updateGithu
   } catch (error) {
     console.log(error);
   }
+  yield put(Actions.setRepositoryLoading(false));
 }

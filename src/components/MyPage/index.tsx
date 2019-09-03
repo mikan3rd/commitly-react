@@ -102,6 +102,8 @@ class MyPage extends React.Component<Props, State> {
       appState: {
         loginUser: { twitter_screen_name, installed_repositories },
       },
+      myPageState: { isRepositoryLoading },
+      updateGithubRepositories,
     } = this.props;
 
     const { githubActiveIndexes } = this.state;
@@ -127,7 +129,6 @@ class MyPage extends React.Component<Props, State> {
             <Header.Content>GitHub連携</Header.Content>
           </Header>
 
-          {!installed_repositories && <p>連携中のリポジトリがありません</p>}
           <p>
             コミットを計測するには<strong>GitHub App</strong>のインストールが必要です
           </p>
@@ -138,10 +139,24 @@ class MyPage extends React.Component<Props, State> {
             target='_blank'
             rel='noopener noreferrer'
           >
-            <Icon name='github' /> Go to GitHub App
+            <Icon name='github' />
+            Go to GitHub App
           </Button>
 
-          <Text>連携中のリポジトリ</Text>
+          <FlexContent>
+            <FlexContentHeader size='tiny'>連携中リポジトリ</FlexContentHeader>
+            <Button compact color='blue' loading={isRepositoryLoading} onClick={() => updateGithubRepositories()}>
+              <Icon name='sync' />
+              更新
+            </Button>
+          </FlexContent>
+
+          {!installed_repositories && (
+            <Text>
+              <strong>なし</strong>
+            </Text>
+          )}
+
           {installed_repositories &&
             installed_repositories.map((repoGroup: any, index: number) => {
               const { name, repositories } = repoGroup;
@@ -157,7 +172,7 @@ class MyPage extends React.Component<Props, State> {
                       {repositories.map((repo: any, subIndex: number) => {
                         return (
                           <SemanticList.Item key={subIndex}>
-                            <Icon name='github alternate' />
+                            <Icon name='folder' />
                             <SemanticList.Content>
                               <SemanticList.Header>{repo.name}</SemanticList.Header>
                             </SemanticList.Content>
@@ -201,6 +216,18 @@ class MyPage extends React.Component<Props, State> {
     );
   }
 }
+
+const FlexContent = styled.div`
+  display: flex;
+  align-items: center;
+  margin: 30px 0 10px 0;
+`;
+
+const FlexContentHeader = styled(Header)`
+  &&& {
+    margin: 0 15px 0 0;
+  }
+`;
 
 const Text = styled.p`
   margin-top: 1em;

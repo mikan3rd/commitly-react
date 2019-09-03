@@ -4,17 +4,20 @@ import { connect } from 'react-redux';
 
 import { State } from 'reducers';
 import { AppState } from 'modules/App/reducers';
+import { MyPageState } from 'modules/MyPage/reducers';
 import appActions from 'modules/App/actions';
 import myPageActions from 'modules/MyPage/actions';
 import MyPage from 'components/MyPage';
 
 export interface MypageStateToProps {
   appState: AppState;
+  myPageState: MyPageState;
 }
 
 function mapStateToProps(state: State) {
   return {
     appState: state.app,
+    myPageState: state.myPage,
   };
 }
 
