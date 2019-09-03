@@ -4,6 +4,7 @@ import { Button, Icon, Header, Segment, Label, List as SemanticList, Accordion }
 import { toast } from 'react-semantic-toasts';
 import styled from 'styled-components';
 import { List } from 'immutable';
+import queryString from 'query-string';
 
 import { Props } from 'containers/MyPage';
 
@@ -19,8 +20,11 @@ class MyPage extends React.Component<Props, State> {
   };
 
   componentDidMount() {
-    // const { updateGithubRepositories } = this.props;
-    // updateGithubRepositories();
+    const { updateGithubRepositories } = this.props;
+    const parsed = queryString.parse(window.location.search, { parseBooleans: true });
+    if (parsed.repository_installed) {
+      updateGithubRepositories();
+    }
   }
 
   signInWithTwitter = () => {
