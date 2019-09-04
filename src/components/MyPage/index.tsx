@@ -1,7 +1,6 @@
 import React from 'react';
 import firebase from 'firebase/app';
 import { Button, Icon, Header, Segment, Label, List as SemanticList, Accordion } from 'semantic-ui-react';
-import { toast } from 'react-semantic-toasts';
 import styled from 'styled-components';
 import { List } from 'immutable';
 import queryString from 'query-string';

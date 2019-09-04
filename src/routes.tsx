@@ -5,10 +5,12 @@ import App from 'containers/App';
 import LoginOnly from 'containers/LoginOnly';
 import TopPage from 'containers/TopPage';
 import MyPage from 'containers/MyPage';
+import Profile from 'containers/Profile';
 
 export const path = {
   topPage: '/',
   mypage: '/mypage',
+  profile: '/profile/:username',
 };
 
 const routes = (
@@ -16,6 +18,7 @@ const routes = (
     <App>
       <Switch>
         <Route exact path={path.topPage} component={TopPage} />
+        <Route exact path={path.profile} component={Profile} />
         <LoginOnly>
           <Switch>
             <Route exact path={path.mypage} component={MyPage} />
