@@ -37,26 +37,11 @@ class MyPage extends React.Component<Props, State> {
       currentUser
         .linkWithPopup(provider)
         .then(result => {
-          const { additionalUserInfo } = result;
-          console.log(additionalUserInfo);
           chengeAuthChecked(false);
           updateTwitterUser(result);
-          toast({
-            type: 'success',
-            icon: 'twitter',
-            title: 'Twitter連携に成功しました！',
-            time: 4000,
-          });
         })
         .catch(error => {
           console.error(error);
-          toast({
-            type: 'error',
-            icon: 'twitter',
-            title: 'Twitter連携に失敗しました...',
-            description: error.message,
-            time: 8000,
-          });
         });
     }
   };
@@ -67,25 +52,12 @@ class MyPage extends React.Component<Props, State> {
     if (currentUser) {
       currentUser
         .unlink(TwitterProviderId)
-        .then(function() {
+        .then(() => {
           chengeAuthChecked(false);
           deleteTwitterUser();
-          toast({
-            type: 'success',
-            icon: 'twitter',
-            title: 'Twitterの解除に成功しました！',
-            time: 4000,
-          });
         })
         .catch(function(error) {
           console.error(error);
-          toast({
-            type: 'error',
-            icon: 'twitter',
-            title: 'Twitterの解除に失敗しました...',
-            description: error.message,
-            time: 8000,
-          });
         });
     }
   };

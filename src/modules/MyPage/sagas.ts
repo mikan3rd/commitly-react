@@ -1,4 +1,5 @@
 import { takeLatest, put } from 'redux-saga/effects';
+import { toast } from 'react-semantic-toasts';
 
 import Actions from './actions';
 import { functions } from 'index';
@@ -26,16 +27,44 @@ function* updateTwitterUser(action: ReturnType<typeof Actions.updateTwitterUser>
   try {
     yield updateTwitterUser(requestData);
     yield put(appActions.getLoginUser());
+    toast({
+      type: 'success',
+      icon: 'twitter',
+      title: 'Twitter連携に成功しました！',
+      time: 4000,
+    });
   } catch (error) {
     console.log(error);
+    toast({
+      type: 'error',
+      icon: 'twitter',
+      title: 'Twitter連携に失敗しました...',
+      description: String(error),
+      time: 8000,
+    });
   }
 }
 
-function deleteTwitterUser(action: ReturnType<typeof Actions.deleteTwitterUser>) {
+function* deleteTwitterUser(action: ReturnType<typeof Actions.deleteTwitterUser>) {
   const deleteTwitterUser = functions.httpsCallable('deleteTwitterUser');
-  deleteTwitterUser().catch(error => {
+  try {
+    yield deleteTwitterUser();
+    toast({
+      type: 'success',
+      icon: 'twitter',
+      title: 'Twitterの解除に成功しました！',
+      time: 4000,
+    });
+  } catch (error) {
     console.error(error);
-  });
+    toast({
+      type: 'error',
+      icon: 'twitter',
+      title: 'Twitterの解除に失敗しました...',
+      description: error.message,
+      time: 8000,
+    });
+  }
 }
 
 function* updateGithubRepositories(action: ReturnType<typeof Actions.updateGithubRepositories>) {
@@ -44,8 +73,21 @@ function* updateGithubRepositories(action: ReturnType<typeof Actions.updateGithu
   try {
     yield updateGithubRepositories();
     yield put(appActions.getLoginUser());
+    toast({
+      type: 'success',
+      icon: 'github',
+      title: '連携中リポジトリを更新しました！',
+      time: 4000,
+    });
   } catch (error) {
     console.log(error);
+    toast({
+      type: 'error',
+      icon: 'github',
+      title: '連携中リポジトリの更新に失敗しました...',
+      description: String(error),
+      time: 8000,
+    });
   }
   yield put(Actions.setRepositoryLoading(false));
 }
